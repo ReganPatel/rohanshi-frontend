@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..911&family=Outfit:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-white font-sans antialiased selection:bg-secondary selection:text-black;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-outfit;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-surface backdrop-blur-lg border border-white/10 shadow-2xl;
+  }
+
+  .premium-button {
+    @apply bg-secondary text-black font-outfit px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(242,204,13,0.4)] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .gold-text {
+    @apply text-secondary font-outfit;
+  }
+
+  .gold-glow {
+    @apply shadow-[0_0_15px_rgba(242,204,13,0.3)];
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    display: block;
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(242, 204, 13, 0.2);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(242, 204, 13, 0.5);
+  }
+}
+
+a.active hr {
+  display: block;
+}
+
+.prata-regular {
+  @apply font-serif font-normal;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width:640px) {
+  a.active {
+    @apply bg-primary text-white;
+  }
+}
+
+/* Add to Cart Button Animation */
+.cart-button {
+  position: relative;
+  padding: 10px;
+  width: 200px;
+  height: 60px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #000;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  transition: .3s ease-in-out;
+  overflow: hidden;
+}
+
+.cart-button:hover {
+  background-color: #1a1a1a;
+}
+
+.cart-button:active {
+  transform: scale(.95);
+}
+
+.cart-button .fa-shopping-cart {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: -10%;
+  font-size: 1.8em;
+  transform: translate(-50%, -50%);
+}
+
+.cart-button .fa-box {
+  position: absolute;
+  z-index: 3;
+  top: -20%;
+  left: 52%;
+  font-size: 1.1em;
+  transform: translate(-50%, -50%);
+}
+
+.cart-button span {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  font-size: 1em;
+  color: #fff;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.cart-button span.add-to-cart {
+  opacity: 1;
+}
+
+.cart-button span.added {
+  opacity: 0;
+}
+
+.cart-button.clicked .fa-shopping-cart {
+  animation: cart 1.5s ease-in-out forwards;
+}
+
+.cart-button.clicked .fa-box {
+  animation: box 1.5s ease-in-out forwards;
+}
+
+.cart-button.clicked span.add-to-cart {
+  animation: txt1 1.5s ease-in-out forwards;
+}
+
+.cart-button.clicked span.added {
+  animation: txt2 1.5s ease-in-out forwards;
+}
+
+@keyframes cart {
+  0% {
+    left: -10%;
+  }
+
+  40%,
+  60% {
+    left: 50%;
+  }
+
+  100% {
+    left: 110%;
+  }
+}
+
+@keyframes box {
+
+  0%,
+  40% {
+    top: -20%;
+  }
+
+  60% {
+    top: 40%;
+    left: 52%;
+  }
+
+  100% {
+    top: 40%;
+    left: 112%;
+  }
+}
+
+@keyframes txt1 {
+  0% {
+    opacity: 1;
+  }
+
+  20%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes txt2 {
+
+  0%,
+  80% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Premium Toast Styles */
+.Toastify__toast {
+  @apply glass-card rounded-2xl font-outfit text-sm tracking-wide p-4 mb-4 !important;
+  background: rgba(10, 10, 10, 0.8) !important;
+  border: 1px solid rgba(242, 204, 13, 0.2) !important;
+  color: white !important;
+}
+
+.Toastify__toast-theme--dark {
+  background: rgba(10, 10, 10, 0.8) !important;
+}
+
+.Toastify__progress-bar {
+  background: linear-gradient(to right, #f2cc0d, #b8860b) !important;
+}
+
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: #f2cc0d !important;
+}
+
+.Toastify__toast--error .Toastify__toast-icon svg {
+  fill: #ff4d4d !important;
+}
+
+.Toastify__close-button {
+  color: white !important;
+  opacity: 0.5;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1;
+}
