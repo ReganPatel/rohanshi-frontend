@@ -21,6 +21,10 @@ const Orders = () => {
 
   const submitReview = async (productId) => {
     if (!token) return;
+    if (!commentInput.trim()) {
+      toast.error("Please write a review comment before submitting.");
+      return;
+    }
     try {
       const response = await axios.post(backendUrl + '/api/product/review', {
         productId,

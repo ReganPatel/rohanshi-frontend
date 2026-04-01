@@ -74,7 +74,7 @@ const BrowseByStyle = () => {
                     <div className='absolute top-4 left-4 md:top-6 md:left-6 z-20'>
                         <h3 className='font-bold text-2xl md:text-3xl lg:text-4xl text-white capitalize drop-shadow-md'>Necklaces</h3>
                     </div>
-                    <div className='absolute bottom-4 left-4 md:bottom-6 md:left-6 md:left-1/2 md:-translate-x-1/2 z-20 w-fit pointer-events-none'>
+                    <div className='absolute bottom-4 left-4 md:bottom-6 md:left-6 z-20 w-fit pointer-events-none'>
                         <span className='text-gray-900 font-semibold tracking-widest text-xs md:text-sm bg-white/95 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-full shadow-md transition-all'>View Collection</span>
                     </div>
                 </div>

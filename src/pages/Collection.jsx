@@ -229,7 +229,7 @@ const Collection = () => {
                     }
                   });
 
-                  const availableSubCategories = baseSubCategories;
+                  const availableSubCategories = baseSubCategories.filter(sub => subsInStock.has(sub));
 
                   return availableSubCategories.map((item, index) => (
                     <label key={index} className='flex items-center gap-4 cursor-pointer group/item'>
