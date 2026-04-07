@@ -6,11 +6,14 @@ const Hero = () => {
   const { siteConfig, navigate } = useContext(ShopContext)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  const heroImages = siteConfig?.heroImages?.length > 0
-    ? siteConfig.heroImages
-    : [assets.hero_img] // Default fallback
+  const heroImages = siteConfig === null
+    ? [] // Still loading config
+    : (siteConfig?.heroImages?.length > 0 
+        ? siteConfig.heroImages 
+        : [assets.hero_img]) // Default fallback
 
   useEffect(() => {
+    if (heroImages.length === 0) return;
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
@@ -21,12 +24,14 @@ const Hero = () => {
   }, [heroImages.length])
 
   const nextImage = () => {
+    if (heroImages.length === 0) return;
     setCurrentImageIndex((prevIndex) =>
       prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
     )
   }
 
   const prevImage = () => {
+    if (heroImages.length === 0) return;
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
     )
@@ -83,21 +88,27 @@ const Hero = () => {
 
       {/*Hero Right Side - Slider*/}
       <div className='relative w-full h-[60vh] lg:h-auto lg:w-1/2 overflow-hidden'>
-        <div
-          className='flex h-full transition-transform duration-1000 ease-[cubic-bezier(0.8,0,0.2,1)]'
-          style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
-        >
-          {heroImages.map((img, index) => (
-            <div key={index} className='w-full h-full flex-shrink-0 relative'>
-              <img
-                className='w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700'
-                src={img}
-                alt={`Hero Collection ${index + 1}`}
-              />
-              <div className='absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60'></div>
-            </div>
-          ))}
-        </div>
+        {heroImages.length === 0 ? (
+          <div className='w-full h-full flex items-center justify-center bg-white/5 animate-pulse'>
+            <div className='w-10 h-10 rounded-full border-2 border-secondary border-t-transparent animate-spin'></div>
+          </div>
+        ) : (
+          <div
+            className='flex h-full transition-transform duration-1000 ease-[cubic-bezier(0.8,0,0.2,1)]'
+            style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+          >
+            {heroImages.map((img, index) => (
+              <div key={index} className='w-full h-full flex-shrink-0 relative'>
+                <img
+                  className='w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700'
+                  src={img}
+                  alt={`Hero Collection ${index + 1}`}
+                />
+                <div className='absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60'></div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Navigation Arrows */}
         {heroImages.length > 1 && (
