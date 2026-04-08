@@ -9,16 +9,17 @@ const BestSeller = () => {
     const [bestSeller, setBestSeller] = useState([]);
 
     useEffect(() => {
-        let bestProduct = products.filter((item) => item.bestseller);
-
         if (siteConfig && siteConfig.bestsellerProducts && siteConfig.bestsellerProducts.length > 0) {
-            const configBestsellers = products.filter(p => siteConfig.bestsellerProducts.includes(p._id));
-            bestProduct = [...configBestsellers, ...bestProduct];
-            // Remove duplicates (keep the custom ones first)
-            bestProduct = bestProduct.filter((item, index, self) => index === self.findIndex((t) => t._id === item._id));
+            // Show exactly what is selected in the admin panel, preserving order and quantity
+            const configBestsellers = siteConfig.bestsellerProducts
+                .map(id => products.find(p => p._id === id))
+                .filter(Boolean);
+            setBestSeller(configBestsellers);
+        } else {
+            // Fallback if nothing is selected in admin panel
+            let bestProduct = products.filter((item) => item.bestseller);
+            setBestSeller(bestProduct.slice(0, 5));
         }
-
-        setBestSeller(bestProduct.slice(0, 5));
     }, [products, siteConfig])
 
     return (

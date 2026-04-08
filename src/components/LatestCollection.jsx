@@ -10,16 +10,17 @@ const LatestCollection = () => {
     const [latestProducts, setLatestProducts] = useState([]);
 
     useEffect(() => {
-        let latestItems = products.filter((item) => item.latest);
-
         if (siteConfig && siteConfig.latestProducts && siteConfig.latestProducts.length > 0) {
-            const configLatest = products.filter(p => siteConfig.latestProducts.includes(p._id));
-            latestItems = [...configLatest, ...latestItems];
-            // Remove duplicates
-            latestItems = latestItems.filter((item, index, self) => index === self.findIndex((t) => t._id === item._id));
+            // Show exactly what is selected in the admin panel, preserving order
+            const configLatest = siteConfig.latestProducts
+                .map(id => products.find(p => p._id === id))
+                .filter(Boolean);
+            setLatestProducts(configLatest);
+        } else {
+            // Fallback if nothing is selected in admin panel
+            let latestItems = products.filter((item) => item.latest);
+            setLatestProducts(latestItems.slice(0, 10));
         }
-
-        setLatestProducts(latestItems.slice(0, 10));
     }, [products, siteConfig])
 
     return (
