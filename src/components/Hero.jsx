@@ -87,7 +87,7 @@ const Hero = () => {
       </div>
 
       {/*Hero Right Side - Slider*/}
-      <div className='relative w-full h-[55vh] sm:h-[60vh] lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 overflow-hidden'>
+      <div className='relative w-full h-[55vh] sm:h-[60vh] lg:h-full lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 overflow-hidden'>
         {heroImages.length === 0 ? (
           <div className='w-full h-full flex items-center justify-center bg-white/5 animate-pulse'>
             <div className='w-10 h-10 rounded-full border-2 border-secondary border-t-transparent animate-spin'></div>
